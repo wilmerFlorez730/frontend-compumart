@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 bg-cover bg-center" style="background-image: url('imagenes/Fondos/FondoLogin.jpg');">
+    <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-8 transform transition-all duration-300 hover:scale-105">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Carrito de Compras</h1>
+            <p class="text-gray-500 mt-2">Administra tus productos y finaliza tu pedido</p>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Productos Disponibles</h2>
+            <table id="productosTabla" class="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+                <thead>
+                    <tr class="bg-gradient-to-r from-blue-500 to-purple-600 text-white"> 
+                        <th class="px-4 py-3 text-left">Producto ID</th>
+                        <th class="px-4 py-3 text-left">Nombre</th>
+                        <th class="px-4 py-3 text-left">Precio</th>
+                        <th class="px-4 py-3 text-left">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Agregar Producto</h2>
+            <form id="agregarProductoForm" class="bg-white shadow-md rounded-lg p-6 mb-8">
+                <div class="mb-4">
+                    <label for="pedidoId" class="block text-sm font-medium text-gray-700 mb-2">Numero De Pedido:</label>
+                    <div id="mensajeRegistro" style="color: green;"></div>
+                    <div id="mensajeError" style="color: red;"></div>
+                    <input type="number" id="pedidoId" name="pedidoId" readonly
+                        class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="cantidad" class="block text-sm font-medium text-gray-700 mb-2">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" required min="1"
+                        class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                </div>
+            </form>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Productos en el Carrito</h2>
+            <table id="carritoTabla" class="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+                <thead>
+                    <tr class="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                        <th class="px-4 py-3 text-left">Producto ID</th>
+                        <th class="px-4 py-3 text-left">Nombre</th>
+                        <th class="px-4 py-3 text-left">Cantidad</th>
+                        <th class="px-4 py-3 text-left">Precio Unitario</th>
+                        <th class="px-4 py-3 text-left">Subtotal</th>
+                        <th class="px-4 py-3 text-left">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Total del Carrito</h2>
+            <p id="totalCarrito" class="text-2xl font-bold text-indigo-600">0</p>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Finalizar Pedido</h2>
+            <form id="finalizarPedidoForm" class="bg-white shadow-md rounded-lg p-6">
+                <div class="mb-4">
+                    <label for="metodoPago" class="block text-sm font-medium text-gray-700 mb-2">Método de Pago:</label>
+                    <select id="metodoPago" name="metodoPago" required 
+                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                        <option value="Tarjeta">Tarjeta</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Transferencia">Transferencia</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="totalPagado" class="block text-sm font-medium text-gray-700 mb-2">Total Pagado:</label>
+                    <input type="number" id="totalPagado" name="totalPagado" step="0.01" required readonly 
+                        class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                </div>
+                <button id="btnFinalizarPedido" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+                    Finalizar Pedido
+                </button>
+            </form>
+        </div>
+
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Registrar Pedido</h1>
+            <form id="registrarPedidoForm" class="bg-white shadow-md rounded-lg p-6 mb-8">
+                <div class="mb-4">
+                    <label for="clienteId" class="block text-sm font-medium text-gray-700 mb-2">ID del Cliente:</label>
+                    <input type="number" id="clienteId" name="clienteId"  
+                        class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="fecha" class="block text-sm font-medium text-gray-700 mb-2">Fecha:</label>
+                    <input type="text" id="fecha" name="fecha"  
+                        class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm">
+                </div>
+                <button id="btnRegistrarPedido" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+                    Registrar Pedido
+                </button>
+            </form>
+        </div>
+
+        <p id="mensajeRegistro" class="text-lg text-green-500"></p>
+        <p id="mensajeError" class="text-lg text-red-500"></p>
+    </div>
+</body>
+</html>
+    <script>
+        const apiUrlProductos = 'http://localhost:3000/api/productos';
+        const apiUrlCarrito = 'http://localhost:3000/api/carrito';
+        const apiUrl = 'http://localhost:3000/api'; 
+
+        // Cargar productos en la tabla
+        async function cargarProductos() {
+        try {
+            const response = await fetch(apiUrlProductos);
+            const productos = await response.json();
+            const tbody = document.querySelector('#productosTabla tbody');
+            tbody.innerHTML = '';
+
+            productos.forEach(producto => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${producto.id_producto}</td>
+                    <td>${producto.nombre}</td>
+                    <td>${producto.precio}</td>
+                    <td>
+                        <button onclick="agregarAlCarrito(${producto.id_producto})">Agregar al Carrito</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        } catch (err) {
+            console.error('Error al cargar productos:', err);
+            alert('Ocurrió un error al cargar los productos');
+        }
+    }
+
+    // Verificar el stock disponible antes de agregar al carrito
+    async function verificarStock(productoId, cantidad) {
+        try {
+            const response = await fetch(`${apiUrlProductos}/${productoId}`);
+            const producto = await response.json();
+            if (producto.stock >= cantidad) {
+                return true; // Stock suficiente
+            } else {
+                alert(`No hay suficiente stock. Solo quedan ${producto.stock} unidades disponibles.`);
+                return false; // Stock insuficiente
+            }
+        } catch (err) {
+            console.error('Error al verificar el stock:', err);
+            alert('Ocurrió un error al verificar el stock');
+            return false;
+        }
+    }
+
+
+        // Agregar producto al carrito
+        async function agregarAlCarrito(productoId) {
+        const pedidoId = document.getElementById('pedidoId').value;
+        const cantidad = document.getElementById('cantidad').value;
+
+        if (!pedidoId || !cantidad) {
+            alert('Por favor, ingresa un ID de pedido y la cantidad antes de agregar al carrito.');
+            return;
+        }
+
+        // Verificar el stock antes de proceder
+        const stockDisponible = await verificarStock(productoId, cantidad);
+        if (!stockDisponible) {
+            return; // Si no hay stock suficiente, no proceder
+        }
+
+        try {
+            const response = await fetch(`${apiUrlCarrito}/agregar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ pedidoId, productoId, cantidad }),
+            });
+
+            if (response.ok) {
+                alert('Producto agregado al carrito');
+                cargarCarrito(pedidoId);
+                calcularTotal(pedidoId);
+            } else {
+                const error = await response.json();
+                alert(`Error: ${error.mensaje || 'No se pudo agregar el producto'}`);
+            }
+        } catch (err) {
+            console.error('Error al agregar el producto:', err.message, err.stack);
+            alert(`Ocurrió un error inesperado: ${err.message}`);
+        }
+    }
+
+        
+        // Manejo del formulario para agregar producto
+        document.getElementById('agregarProductoForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const pedidoId = document.getElementById('pedidoId').value;
+        const cantidad = parseInt(document.getElementById('cantidad').value);
+
+        // Aquí recuperamos el productoId en base al producto seleccionado en la tabla
+        const productoId = document.querySelector('#productosTabla tbody button').dataset.productoId;
+
+        // Recuperamos el stock disponible del producto
+        const stockDisponible = parseInt(document.querySelector(`#producto-${productoId} .stock`).textContent);
+
+        // Validación: verificar que la cantidad no exceda el stock disponible
+        if (cantidad <= 0 || cantidad > stockDisponible) {
+          alert(`La cantidad solicitada debe ser mayor que 0 y no exceder el stock disponible (${stockDisponible})`);
+            return;
+        }
+
+        try {
+         const response = await fetch(`${apiUrl}/carrito/agregar`, {
+              method: 'POST',
+              headers: {
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({ pedidoId, productoId, cantidad }),
+            });
+
+            if (response.ok) {
+                alert('Producto agregado al carrito');
+                cargarCarrito(pedidoId);
+                calcularTotal(pedidoId);
+            } else {
+             const error = await response.json();
+              alert(`Error: ${error.mensaje || 'No se pudo agregar el producto'}`);
+         }
+     } catch (err) {
+            console.error('Error al agregar el producto:', err);
+            alert('Ocurrió un error inesperado');
+            }
+    });
+
+        // Manejo del formulario para finalizar el pedido
+        document.getElementById('finalizarPedidoForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const pedidoId = document.getElementById('pedidoId').value; // Usar el mismo pedidoId
+            const metodoPago = document.getElementById('metodoPago').value;
+            const totalPagado = document.getElementById('totalPagado').value;
+
+            if (!pedidoId) {
+                alert('Primero agrega productos al carrito para generar un pedido');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/pedidos/finalizar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ pedidoId, metodoPago, totalPagado }),
+                });
+
+                if (response.ok) {
+                    const resultado = await response.json();
+                    alert(resultado.mensaje || 'Pedido finalizado con éxito');
+                    // Opcional: limpiar el carrito y reiniciar los valores
+                    document.getElementById('carritoTabla').querySelector('tbody').innerHTML = '';
+                    document.getElementById('totalCarrito').textContent = '0';
+                    document.getElementById('pedidoId').value = '';
+                    window.open(
+                        'registrarEnvio.html', // Cambia esto por la ruta al HTML deseado
+                            'Envio', // Nombre de la ventana (opcional)
+                             'width=1200,height=800,resizable=yes,scrollbars=yes' // Opciones de la ventana
+                    );
+
+                } else {
+                    const error = await response.json();
+                    alert(resultado.mensaje || 'Pedido finalizado con éxito');
+                }
+            } catch (err) {
+                console.error('Error al finalizar el pedido:', err);
+                alert(resultado.mensaje || 'Pedido finalizado con éxito');
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+    const pedidoId = localStorage.getItem('pedidoId');
+    if (pedidoId) {
+        // Establecer el valor en el campo de "Numero De Pedido"
+        document.getElementById('pedidoId').value = pedidoId;
+    }
+});
+        // Eliminar producto del carrito
+        async function eliminarProducto(pedidoId, productoId) {
+            try {
+                const response = await fetch(`${apiUrlCarrito}/eliminar`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ pedidoId, productoId }),
+                });
+
+                if (response.ok) {
+                    alert('Producto eliminado');
+                    cargarCarrito(pedidoId);
+                    calcularTotal(pedidoId);
+                } else {
+                    alert('Error al eliminar el producto');
+                }
+            } catch (err) {
+                console.error('Error al eliminar el producto:', err);
+                alert('Ocurrió un error inesperado');
+            }
+        }
+
+        // Calcular el total del carrito
+        async function calcularTotal(pedidoId) {
+            try {
+                const response = await fetch(`${apiUrl}/carrito/total/${pedidoId}`);
+                if (response.ok) {
+                    const { total } = await response.json();
+                    document.getElementById('totalCarrito').textContent = total || 0;
+
+                    // Actualizar el valor del campo "Total Pagado" automáticamente
+                    document.getElementById('totalPagado').value = total || 0;
+                } else {
+                    document.getElementById('totalCarrito').textContent = 'Error al calcular el total';
+                    document.getElementById('totalPagado').value = 0;
+                }
+            } catch (err) {
+                console.error('Error al calcular el total:', err);
+                document.getElementById('totalCarrito').textContent = 'Error al calcular el total';
+                document.getElementById('totalPagado').value = 0;
+            }
+        }
+
+
+    async function cargarCarrito(pedidoId) {
+        try {
+            const response = await fetch(`${apiUrlCarrito}/${pedidoId}`);
+            const tbody = document.querySelector('#carritoTabla tbody');
+            tbody.innerHTML = '';
+
+            if (response.ok) {
+                const productos = await response.json();
+                productos.forEach(producto => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${producto.producto_id}</td>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.cantidad}</td>
+                        <td>${producto.preciounitario}</td>
+                        <td>${producto.subtotal}</td>
+                        <td>
+                            <button onclick="eliminarProducto(${pedidoId}, ${producto.producto_id})">Eliminar</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } else {
+                alert('Error al cargar el carrito');
+            }
+        } catch (err) {
+            console.error('Error al cargar el carrito:', err);
+            alert('Ocurrió un error inesperado al cargar el carrito');
+        }
+    }
+
+    // Eliminar producto del carrito
+    async function eliminarProducto(pedidoId, productoId) {
+        try {
+            const response = await fetch(`${apiUrlCarrito}/eliminar`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ pedidoId, productoId }),
+            });
+
+            if (response.ok) {
+                alert('Producto eliminado');
+                cargarCarrito(pedidoId);
+                calcularTotal(pedidoId);
+            } else {
+                alert('Error al eliminar el producto');
+            }
+        } catch (err) {
+            console.error('Error al eliminar el producto:', err);
+            alert('Ocurrió un error inesperado');
+        }
+    }
+    cargarProductos();
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const pedidoId = localStorage.getItem('pedidoId');
+    if (pedidoId) {
+        document.getElementById('pedidoId').textContent = `Número de Pedido: ${pedidoId}`;
+    }
+    });
+
+
+    document.getElementById('registrarPedidoForm').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevenir el envío del formulario por defecto
+
+    const clienteId = document.getElementById('clienteId').value;
+    const fecha = document.getElementById('fecha').value;
+
+    // Verificar que el cliente ID esté presente
+    if (!clienteId) {
+        alert('Por favor, ingresa el ID del cliente');
+        return;
+    }
+
+    // Si la fecha no se proporciona, usamos la fecha actual
+    const fechaActual = fecha || new Date().toISOString().split('T')[0]; // 'YYYY-MM-DD'
+
+    try {
+        // Enviar los datos a la API para registrar el pedido
+        const response = await fetch('http://localhost:3000/api/pedidos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fecha: fechaActual, cliente_id: clienteId }),
+        });
+
+        if (response.ok) {
+            const resultado = await response.json();
+            // Mostrar el ID en el label de Número de Pedido
+            const numeroPedidoLabel = document.getElementById('pedidoId');
+            numeroPedidoLabel.textContent = `Número de Pedido: ${resultado.id_pedido}`; // Usa el campo correcto del resultado
+
+            // También puedes almacenar el ID en localStorage para uso futuro
+            localStorage.setItem('pedidoId', resultado.id_pedido);
+
+            // Limpiar mensajes anteriores
+            document.getElementById('mensajeRegistro').textContent = `Pedido registrado con éxito. ID: ${resultado.id_pedido} Recarga la pagina para realizar tu pedido`;
+            document.getElementById('mensajeError').textContent = ''; 
+        } else {
+            const error = await response.json();
+            document.getElementById('mensajeError').textContent = `Error: ${error.mensaje || 'No se pudo registrar el pedido'}`;
+            document.getElementById('mensajeRegistro').textContent = ''; 
+        }
+    } catch (err) {
+        console.error('Error al registrar el pedido:', err);
+        document.getElementById('mensajeError').textContent = 'Ocurrió un error inesperado';
+        document.getElementById('mensajeRegistro').textContent = ''; 
+    }
+});
+
+    </script>
+</body>
+</html>

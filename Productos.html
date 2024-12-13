@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compumart - Product Categories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .product-card {
+            transition: transform 0.3s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-6 px-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Compumart</h1>
+            <div class="space-x-4">
+                <a href="Home_2.html" class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-50 inline-block transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+                    Inicio
+                </a>
+                <a href="login.html" class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-50 inline-block transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+                    Ir al Login
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-8">
+        <!-- Cell Phones Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Cell Phones</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/iphone 13 pro.jpg" alt="Phone 1" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">iPhone 13 Pro</h3>
+                        <p class="text-gray-600 mb-4">Latest Apple flagship with pro camera system</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/samsung Galaxi s21.jpg" alt="Phone 2" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Samsung Galaxy S21</h3>
+                        <p class="text-gray-600 mb-4">Premium Android experience with 5G</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/goggle pixel 6.jpg" alt="Phone 3" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Google Pixel 6</h3>
+                        <p class="text-gray-600 mb-4">Pure Android with amazing camera</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/one plus 9 pro.jpg" alt="Phone 4" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">OnePlus 9 Pro</h3>
+                        <p class="text-gray-600 mb-4">Fast performance with OxygenOS</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/xiaomi Mi 11.jpg" alt="Phone 5" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Xiaomi Mi 11</h3>
+                        <p class="text-gray-600 mb-4">Flagship features at mid-range price</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/huawei p40 pro.jpg" alt="Phone 6" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Huawei P40 Pro</h3>
+                        <p class="text-gray-600 mb-4">Premium build with Leica cameras</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/sony xperia 1 lll.jpg" alt="Phone 7" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Sony Xperia 1 III</h3>
+                        <p class="text-gray-600 mb-4">Professional camera features</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/motorola edge+.jpg" alt="Phone 8" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Motorola Edge+</h3>
+                        <p class="text-gray-600 mb-4">Edge display with 5G capabilities</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/asus rog phone 5.jpg" alt="Phone 9" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">ASUS ROG Phone 5</h3>
+                        <p class="text-gray-600 mb-4">Ultimate gaming smartphone</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/celulares/nokia 9 pureview.jpg" alt="Phone 10" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Nokia 9 PureView</h3>
+                        <p class="text-gray-600 mb-4">Five camera array system</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Laptops Section -->
+        <section class="mb-12 bg-gray-50 py-8 px-4 rounded-lg">
+            <h2 class="text-2xl font-bold mb-6">Laptops</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/MacBook Pro.jpeg" alt="Laptop 1" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">MacBook Pro</h3>
+                        <p class="text-gray-600 mb-4">M1 Pro, 16GB RAM, 512GB SSD</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/Dell-XPS-15-9560-1.jpg" alt="Laptop 2" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Dell XPS 15</h3>
+                        <p class="text-gray-600 mb-4">Intel i7, 32GB RAM, 1TB SSD</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/HP Spectre x360.jpeg" alt="Laptop 3" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">HP Spectre x360</h3>
+                        <p class="text-gray-600 mb-4">2-in-1 convertible ultrabook</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/Lenovo ThinkPad X1.jpeg" alt="Laptop 4" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Lenovo ThinkPad X1</h3>
+                        <p class="text-gray-600 mb-4">Business laptop with security features</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/ASUS ROG Zephyrus.jpg" alt="Laptop 5" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">ASUS ROG Zephyrus</h3>
+                        <p class="text-gray-600 mb-4">Gaming laptop with RTX 3080</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/Acer Swift 5.jpg" alt="Laptop 6" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Acer Swift 5</h3>
+                        <p class="text-gray-600 mb-4">Ultra-lightweight notebook</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/Microsoft Surface Laptop.jpeg" alt="Laptop 7" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Microsoft Surface Laptop</h3>
+                        <p class="text-gray-600 mb-4">Premium Windows experience</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/Razer Blade 15.jpeg" alt="Laptop 8" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">Razer Blade 15</h3>
+                        <p class="text-gray-600 mb-4">Premium gaming laptop</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/LG Gram 17.jpg" alt="Laptop 9" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">LG Gram 17</h3>
+                        <p class="text-gray-600 mb-4">Lightweight 17-inch laptop</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                    <img src="imagenes/portatiles/MSI Creator Z16.jpg" alt="Laptop 10" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-xl mb-2">MSI Creator Z16</h3>
+                        <p class="text-gray-600 mb-4">Content creation powerhouse</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="mb-12 bg-blue-50 py-8 px-4 rounded-lg">
+                <h2 class="text-2xl font-bold mb-6">Electrodomesticos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                        <img src="imagenes/electrodomesticos/-Alexa-.jpg" alt="Appliance 1" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2">Alexa</h3>
+                            <p class="text-gray-600 mb-4">Asistente virtual inteligente que controla dispositivos del hogar y responde a comandos de voz.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                        <img src="imagenes/electrodomesticos/abanico samurai.jpg" alt="Appliance 2" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2">Abanico Samurai</h3>
+                            <p class="text-gray-600 mb-4">Ventilador de alta eficiencia con diseño elegante para mantener tu espacio fresco.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                        <img src="imagenes/electrodomesticos/lavadora samsung.jpg" alt="Appliance 3" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2">Aire LG</h3>
+                            <p class="text-gray-600 mb-4">Aire acondicionado de última tecnología que ofrece un rendimiento energético eficiente.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                        <img src="imagenes/electrodomesticos/licuadora divul.jpg" alt="Appliance 4" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2">Licuadora DIVUL</h3>
+                            <p class="text-gray-600 mb-4">Licuadora potente para preparar batidos y jugos con facilidad y rapidez.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                        <img src="imagenes/electrodomesticos/lavadora samsung.jpg" alt="Appliance 5" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2">Lavadora SAMSUNG</h3>
+                            <p class="text-gray-600 mb-4">Lavadora con tecnología avanzada para un lavado eficiente y cuidado de tus prendas.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow product-card">
+                        <img src="imagenes/electrodomesticos/-nevera-samsung.jpg" alt="Appliance 6" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-2">Nevera SAMSUNG</h3>
+                            <p class="text-gray-600 mb-4">Nevera de alta capacidad y eficiencia energética, ideal para mantener los alimentos frescos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+    </main>
+</body>
+</html>7

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CompuMart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-cover bg-center bg-gray-50" style="background-image: url('imagenes/Fondos/FondoLogin.jpg');">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
+            <div id="loginForm">
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Iniciar Sesión</h2>
+                <form class="mt-8 space-y-6" id="loginFormSubmit">
+                    <div class="rounded-md shadow-sm space-y-4">
+                        <div>
+                            <label for="loginEmail" class="block text-sm font-medium text-gray-700">Correo</label>
+                            <input id="loginEmail" name="correo" type="email" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="correo@ejemplo.com">
+                        </div>
+                        <div>
+                            <label for="loginPassword" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                            <input id="loginPassword" name="contrasena" type="password" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                            Iniciar Sesión
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" onclick="toggleForms()" class="text-indigo-600 hover:text-indigo-500">
+                            ¿No tienes cuenta? Regístrate aquí
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Formulario de Registro (sin rol_id) -->
+            <div id="registroForm" class="hidden">
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Registro de Cliente</h2>
+                <form class="mt-8 space-y-6" id="registroFormSubmit">
+                    <div class="rounded-md shadow-sm space-y-4">
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                            <input id="nombre" name="nombre" type="text" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Tu nombre completo">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Correo</label>
+                            <input id="email" name="correo" type="email" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="correo@ejemplo.com">
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                            <input id="password" name="contrasena" type="password" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="">
+                        </div>
+                        <div>
+                            <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                            <input id="telefono" name="telefono" type="tel" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="+34 123456789">
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                            Registrar
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" onclick="toggleForms()" class="text-indigo-600 hover:text-indigo-500">
+                            ¿Ya tienes cuenta? Inicia sesión aquí
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForms() {
+            const loginForm = document.getElementById("loginForm");
+            const registroForm = document.getElementById("registroForm");
+            loginForm.classList.toggle("hidden");
+            registroForm.classList.toggle("hidden");
+        }
+
+    document.getElementById('loginFormSubmit').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const correo = document.getElementById('loginEmail').value;
+    const contrasena = document.getElementById('loginPassword').value;
+
+    try {
+        const response = await fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                correo,
+                contrasena
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Redirigir según el rol_id
+            if (data.cliente.rol_id === 2) {
+                // Si rol_id es 2, redirigir a 'GestionProductos.html'
+                alert('Bienvenido, administrador.');
+                window.location.href = 'Gestion_Productos.html';
+            } else {
+                // Guardar el ID del pedido en el almacenamiento local y redirigir
+                localStorage.setItem('pedidoId', data.pedido.id);
+                alert(`Inicio de sesión exitoso. Tu número de sesión es ${data.pedido.id} y tu ID de cliente es ${data.cliente.id}`);
+                window.location.href = 'Home.html';
+            }
+        } else {
+            alert(data.message || 'Error al iniciar sesión');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error de conexión. Intenta nuevamente.');
+    }
+});
+
+        // Registro Form Handler
+        document.getElementById('registroFormSubmit').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('email').value;
+            const contrasena = document.getElementById('password').value;
+            const telefono = document.getElementById('telefono').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/clientes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        nombre,
+                        correo,
+                        contrasena,
+                        telefono
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Cliente registrado exitosamente');
+                    // Cambiar a formulario de login
+                    toggleForms();
+                } else {
+                    alert(data.message || 'Error al registrar cliente');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error de conexión. Intenta nuevamente.');
+            }
+        });
+    </script>
+</body>
+</html>
